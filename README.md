@@ -1,2 +1,2 @@
 # Hotelliharjoitus
-Hotelliharjoitus valmiina
+Hotelliharjoitus valmiina, löytyy branches osiosta nimellä "koodi"
