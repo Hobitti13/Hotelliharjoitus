@@ -1,0 +1,61 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+// Valitaan vakio hotellin huonemäärälle
+const int HUONEMAARA = 10;  // Tässä hotellissa on 10 huonetta
+const int HUONEHINTA = 100; // Huoneen hinta per yö on 100 euroa
+
+int main() {
+    vector<bool> varaukset(HUONEMAARA, false); // Vektorilla seuraamme huoneiden varauksia
+    char jatka;                               // On käyttäjän päätös jatkaa huoneiden varaamista, kuitenkin enintään n -määrän huoneita
+
+    cout << "Tervetuloa hotellin varausjarjestelmaan!\n";
+    do {
+        int huonenumero, oidenMaara;
+
+        // Kysytään numero huoneelle, jonka käyttäjä/asiakas haluaa varata, jos huonetta ei ole, ilmoitetaan virheestä
+        while (true) {
+            cout << "Anna varattavan huoneen numero (1-" << HUONEMAARA << "): ";
+            cin >> huonenumero;
+
+            if (huonenumero < 1 || huonenumero > HUONEMAARA) {
+                cout << "Virhe: Numero ei ole sallittujen arvojen valilla. Yrita uudelleen.\n";
+                continue;
+            }
+
+            if (varaukset[huonenumero - 1]) {
+                cout << "Huone " << huonenumero << " on jo varattu. Valitse toinen huone.\n";
+            }
+            else {
+                break; // Kun huone on vapaa, sen voi varata
+            }
+        }
+
+        // Kysytään käyttäjältä/asiakkaalta, että kuinka monta yötä hän haluaa yöpyä
+        cout << "Kuinka monta yota haluat yopya? ";
+        cin >> oidenMaara;
+
+        if (oidenMaara <= 0) {
+            cout << "Virhe: Oiden maara ei voi olla nolla tai negatiivinen. Yrita uudelleen.\n";
+            continue;
+        }
+
+        // Lasketaan loppusumma laskulle, joka määräytyy varattujen huoneiden ja öiden määrästä
+        int loppusumma = oidenMaara * HUONEHINTA;
+        cout << "Huone " << huonenumero << " varattu " << oidenMaara
+            << " yoksi. Laskun loppusumma: " << loppusumma << " euroa.\n";
+
+        // Merkitään huone varatuksi
+        varaukset[huonenumero - 1] = true;
+
+        // Kysytään, haluaako käyttäjä varata lisää huoneita, jos lisää huoneita ei varata ohjelma toivottaa tervetulleeksi
+        cout << "Haluatko varata lisaa huoneita? (k/e): ";
+        cin >> jatka;
+
+    } while (jatka == 'k' || jatka == 'K');
+    // Koodi ja ohjelma päättyy
+    cout << "Kiitos varauksista! Tervetuloa hotelliimme!\n";
+    return 0;
+}
