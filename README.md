@@ -1,0 +1,2 @@
+# Hotelliharjoitus
+Hotelliharjoitus valmiina
